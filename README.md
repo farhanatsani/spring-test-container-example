@@ -18,7 +18,8 @@ Later, i will add using kafka and mockserver container
 `mvn clean install`
 <br />`mvn spring-boot:run`
 <br /> <br />
-
+And you can manually test using postman, insomnia, etc
+<br /> <br />
 - For automation test, you're not required to connect postgresql
 - Just run with following command :
 <br /> <br />
