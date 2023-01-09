@@ -46,7 +46,7 @@ public class CommentController {
                 .map(book -> {
                     commentRequest.setBook(book);
                     return commentService.save(commentRequest);
-                }).orElseThrow(() -> new RuntimeException("Comment is not found id = " + bookId));
+                }).orElseThrow(() -> new RuntimeException("Comment is not found for book id = " + bookId));
 
         return ResponseEntity
                 .status(HttpStatus.CREATED)
@@ -58,7 +58,7 @@ public class CommentController {
             @RequestBody Comment commentRequest) {
 
         Comment comment = commentService.findById(id)
-                .orElseThrow(() -> new RuntimeException("Comment is not found id = " + id));
+                .orElseThrow(() -> new RuntimeException("Comment is not found for book id = " + id));
 
         comment.setComment(comment.getComment());
 
