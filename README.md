@@ -23,7 +23,11 @@ And you can manually test using postman, insomnia, etc
 - For automation test, you're not required to connect postgresql
 - Just run with following command :
 <br /> <br />
+Running test on specific test class : <br />
 `mvn test -Dtest=BookControllerTests`
+<br /> <br />
+Running test on all class : <br />
+`mvn test`
 
 ## Generate Allure Report
 We can generate allure report with following command :
