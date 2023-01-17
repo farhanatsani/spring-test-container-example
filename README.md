@@ -30,3 +30,5 @@ We can generate allure report with following command :
 <br /> <br />
 `mvn clean test allure:report`
 <br />`mvn allure:serve`
+
+![Dashboard](img/allure_dashboard.png "Allure Dashboard")
