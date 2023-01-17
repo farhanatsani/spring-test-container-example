@@ -25,3 +25,8 @@ And you can manually test using postman, insomnia, etc
 <br /> <br />
 `mvn test -Dtest=BookControllerTests`
 
+## Generate Allure Report
+We can generate allure report with following command :
+<br /> <br />
+`mvn clean test allure:report`
+<br />`mvn allure:serve`
