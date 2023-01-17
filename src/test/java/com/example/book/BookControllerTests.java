@@ -1,9 +1,9 @@
 package com.example.book;
 
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
-import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
+import io.qameta.allure.Allure;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import org.junit.jupiter.api.*;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -19,11 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @TestPropertySource(properties = "spring.datasource.url=jdbc:tc:postgresql:latest:///")
+@DisplayName("Book Test")
 public class BookControllerTests {
     @Autowired
     MockMvc mockMvc;
     @Test
     @Order(1)
+    @Description("Save Book Description")
     public void saveBook() throws Exception {
 
         /*
@@ -38,6 +40,7 @@ public class BookControllerTests {
         *
         */
 
+        Allure.step("Save Book 1");
         String request1st = "{ \"title\": \"Java Book\", \"description\": \"Description of Java Book\", \"publishedAt\": \"2020-01-01\" }";
         mockMvc.perform(
                         post("/api/v1/books")
@@ -59,6 +62,7 @@ public class BookControllerTests {
         *
         */
 
+        Allure.step("Save Book 2");
         String request2nd = "{ \"title\": \"PostgreSQL Book\", \"description\": \"Description of PostgreSQL Book\", \"publishedAt\": \"2020-01-02\" }";
         mockMvc.perform(
                         post("/api/v1/books")
@@ -90,6 +94,7 @@ public class BookControllerTests {
     }
     @Test
     @Order(2)
+    @Description("Find Book By ID Description")
     public void findBookById() throws Exception {
 
         /*
@@ -106,6 +111,7 @@ public class BookControllerTests {
         */
         String expectedResponse1st = " { \"id\": 1, \"title\": \"Java Book\", \"description\": \"Description of Java Book\", \"publishedAt\": \"2020-01-01\" }";
 
+        Allure.step("Find ID : 1");
         String result = mockMvc.perform(get("/api/v1/books/1"))
                             .andExpect(status().isOk())
                             .andReturn()
@@ -129,6 +135,7 @@ public class BookControllerTests {
         */
         String expectedResponse2nd = " { \"id\": 2, \"title\": \"PostgreSQL Book\", \"description\": \"Description of PostgreSQL Book\", \"publishedAt\": \"2020-01-02\" }";
 
+        Allure.step("Find ID : 2");
         String result2nd = mockMvc.perform(get("/api/v1/books/2"))
                 .andExpect(status().isOk())
                 .andReturn()
@@ -152,6 +159,7 @@ public class BookControllerTests {
         */
         String expectedResponse3rd = " { \"id\": 3, \"title\": \"Kubernetes Book\", \"description\": \"Description of Kubernetes Book\", \"publishedAt\": \"2020-01-03\" }";
 
+        Allure.step("Find ID : 3");
         String result3rd = mockMvc.perform(get("/api/v1/books/3"))
                 .andExpect(status().isOk())
                 .andReturn()
@@ -163,8 +171,10 @@ public class BookControllerTests {
 
     @Test
     @Order(3)
+    @Description("Find Not Found Book")
     public void findBookByNonExistingId() throws Exception {
 
+        Allure.step("Find Book : 5, NOT FOUND");
         mockMvc.perform(get("/api/v1/books/5"))
                 .andExpect(status().isNotFound());
 
